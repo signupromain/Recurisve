@@ -10,6 +10,7 @@ class Menu{
     private $startRow = "<li>";
     private $endLine = "</ul>";
     private $endRow = "</li>";
+    // pub
 
     // public constructor
     public function __construct(array $tab)
