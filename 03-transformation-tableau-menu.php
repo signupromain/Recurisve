@@ -15,29 +15,43 @@ class Menu{
     public function __construct(array $tab)
     {
         $this->createMenu($tab);
-        return $this->sortie;
     }
 
     // private method
     private function createMenu(array $tabs){
-        $this->sortie .= $this->startLine;
+        $this->setSortie($this->startLine);
         foreach ($tabs as $key => $values){
             // if the value is a array
             if(is_array($values)){
 
             }else{
-                $this->sortie .= $this->startRow.$values.$this->endRow;
+                $this->setSortie($this->startRow.$values.$this->endRow);
             }
         }
-        $this->sortie .= $this->endLine;
+        $this->setSortie($this->endLine);
     }
+
     // public getter
     public function getSortie(){
         return $this->sortie;
     }
+
+    // public setter
+    public function setSortie(string $str){
+        // concatenation of sortie
+        $this->sortie .= $str;
+    }
+
 }
 
-$data = ["un","deux","trois"];
+$data = [
+    "un",
+    "deux",
+    [
+        "trois",
+    ],
+    "quatre",
+];
 
 $pourmenu = new Menu($data);
 $menu = $pourmenu->getSortie();
