@@ -14,20 +14,33 @@ class Menu{
     // public constructor
     public function __construct(array $tab)
     {
-        return $this->createMenu($tab);
+        $this->createMenu($tab);
+        return $this->sortie;
     }
 
     // private method
     private function createMenu(array $tabs){
+        $this->sortie .= $this->startLine;
         foreach ($tabs as $key => $values){
-            echo "$values |";
+            // if the value is a array
+            if(is_array($values)){
+
+            }else{
+                $this->sortie .= $this->startRow.$values.$this->endRow;
+            }
         }
+        $this->sortie .= $this->endLine;
+    }
+    // public getter
+    public function getSortie(){
+        return $this->sortie;
     }
 }
 
 $data = ["un","deux","trois"];
 
 $pourmenu = new Menu($data);
+$menu = $pourmenu->getSortie();
 
 ?>
 <html>
@@ -36,7 +49,7 @@ $pourmenu = new Menu($data);
 </head>
 <body>
     <h1>Menu</h1>
-<div id="menu"></div>
+<div id="menu"><?=$menu?></div>
 <div id="content"></div>
 </body>
 </html>
