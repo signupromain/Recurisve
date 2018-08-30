@@ -20,7 +20,8 @@ function listFiles($chemin="./"){
         if($valeur!="."&&$valeur!=".."&&$valeur!=".git"){
             // si c'est un dossier
             if(is_dir($chemin.$valeur)){
-                $sortie.= " * $valeur \n";
+                $sortie.= " * $valeur \n
+                ";
                 $sortie.= "\t".listFiles($chemin.$valeur."/")."\n";
                 // sinon c'est un fichier
             }else{
@@ -41,3 +42,28 @@ $b = listFiles("./");
 var_dump($b);
 ?>
 </pre>
+<h3>Fonction récurisve</h3>
+<pre><code>
+    function dirToArray($dir) {
+
+    $result = array();
+
+    $cdir = scandir($dir);
+    foreach ($cdir as $key => $value)
+    {
+    if (!in_array($value,array(".","..")))
+    {
+    if (is_dir($dir . DIRECTORY_SEPARATOR . $value))
+    {
+    $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
+    }
+    else
+    {
+    $result[] = $value;
+    }
+    }
+    }
+
+    return $result;
+    }
+</code></pre>
